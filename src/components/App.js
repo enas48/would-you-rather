@@ -9,11 +9,15 @@ import NewQuestion from './NewQuestion'
 import QuestionPage from './QuestionPage'
 import LeaderBoard from './LeaderBoard'
 import NavBar from './Nav'
+import Login from './Login'
 class App extends Component {
   componentDidMount() {
+  
     this.props.dispatch(handleInitialData())
+
   }
   render() {
+    
     return (
       <Router>
         <Fragment>
@@ -22,13 +26,14 @@ class App extends Component {
         <NavBar/>
       <div className='container'>
 
-        {this.props.loading === true
-          ? null
+        {this.props.authedUser === null
+          ? <Login/>
           : <div>
                 <Route path='/' exact component={Home} />
                 <Route path='/add' component={NewQuestion} />
                 <Route path='/question/:question_id' component={QuestionPage} />    
                 <Route path='/leaderboard' component={LeaderBoard} />    
+                <Route path='/login' component={Login} />    
             </div>}
       </div>
       </Fragment>
@@ -38,7 +43,12 @@ class App extends Component {
 }
 
 
+function mapStateToProps ({authedUser}) {
+  return {
+    authedUser,
+   
+  }
+}
 
 
-
-export default connect()(App)
+export default connect( mapStateToProps)(App)
