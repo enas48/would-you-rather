@@ -1,24 +1,58 @@
-import React from 'react'
-import {Form, Card} from 'react-bootstrap'
+import {React, Component} from 'react'
+import {Form, Card, Button} from 'react-bootstrap'
+import { getUsers} from '../actions/shared'
+import {logIn} from '../actions/authedUser'
+import { connect } from 'react-redux'
 
-export default function Login() {
+
+class Login extends Component {
+  componentDidMount() {
+    this.props.dispatch(getUsers())
+  }
+  state={
+    authedUser:null
+  }
+
+  handleChange=(e)=>{
+    console.log(e.target.value)
+    this.setState({  authedUser:e.target.value})
+  }
+  handleSubmit=(e)=>{
+    e.preventDefault();
+    if(this.state.authedUser!==''){
+    this.props.dispatch(logIn(this.state.authedUser))
+    }else{
+      return
+    }
+  }
+  render() {
   return (
-<Card>
+<Card className="col-5 m-auto">
 <Card.Header>
-  <h5 className='center'><p>Welcome to would you rather App!</p>
+  <h5 className="center"><p>Welcome to would you rather App!</p>
 please sign in to continue</h5></Card.Header>
-  <Card.Body>
-    <img src='logo192.png'/>
-  <Form.Select aria-label="Default select example">
-  <option>Open this select menu</option>
-  <option value="1">One</option>
+  <Card.Body className="center">
+    <img src='logo192.png' alt=""/>
+  <Form.Select aria-label="Default select example" onChange={this.handleChange}>
+  <option disabled selected value hidden >Open this select menu</option>
+  {Object.keys(this.props.users).map(user=>
+  <option value={user} key={user}>{user}</option>    
+    )}
+{/* 
   <option value="2">Two</option>
-  <option value="3">Three</option>
+  <option value="3">Three</option> */}
 </Form.Select>
+<Button variant="info" className="w-100" onClick={this.handleSubmit}>Sign In</Button>
   </Card.Body>
 </Card>
 
 
   )
+  }
 } 
-  
+
+function mapStateToProps( {users} ){
+  return {users};
+}
+
+export default connect(mapStateToProps)(Login) 
