@@ -2,7 +2,7 @@ let users = {
   sarahedo: {
     id: 'sarahedo',
     name: 'Sarah Edo',
-    avatarURL: 'https://avatars.dicebear.com/v2/avataaars/75ee485b7836c22ed6daf0c254c0aec7.svg',
+    avatarURL: 'https://react.semantic-ui.com/images/avatar/small/molly.png',
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionTwo',
@@ -14,7 +14,7 @@ let users = {
   tylermcginnis: {
     id: 'tylermcginnis',
     name: 'Tyler McGinnis',
-    avatarURL: 'https://avatars.dicebear.com/v2/avataaars/66599fcbbe7a8d4e0de401dbc06f0fcd.svg',
+    avatarURL: 'https://react.semantic-ui.com/images/avatar/small/matthew.png',
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +24,7 @@ let users = {
   johndoe: {
     id: 'johndoe',
     name: 'John Doe',
-    avatarURL: 'https://avatars.dicebear.com/v2/avataaars/c5d078c87d7f76c1759f6458ff3eff5f.svg',
+    avatarURL: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg',
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',

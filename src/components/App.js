@@ -1,10 +1,9 @@
 
 import React, { Component, Fragment } from 'react'
-import { Route, Switch} from 'react-router-dom'
+import { Route, Switch,withRouter} from 'react-router-dom'
 
 import { connect } from 'react-redux'
-// import { handleInitialData } from '../actions/shared'
-// import LoadingBar from 'react-redux-loading-bar'
+ import LoadingBar from 'react-redux-loading-bar'
 import Home from './Home'
 import NewQuestion from './NewQuestion'
 import QuestionPage from './QuestionPage'
@@ -15,16 +14,14 @@ import NavBar from './Nav'
 import Login from './Login'
 import NotFound from './NotFound'
 class App extends Component {
-  // componentDidMount() {
-  //   this.props.dispatch(handleInitialData())
-  // }
+
   render() {
     
     return (
 
         <Fragment>
-        {/* <LoadingBar /> */}
-        <h2 className='center mb-4'>Would you rather</h2>
+         <LoadingBar /> 
+        <h2 className='center my-4'>Would you rather!</h2>
         <NavBar/>
       <div className='container'>
               <Switch>
@@ -50,4 +47,4 @@ function mapStateToProps ({authedUser}) {
 }
 
 
-export default connect( mapStateToProps)(App)
+export default  withRouter(connect(mapStateToProps)(App))

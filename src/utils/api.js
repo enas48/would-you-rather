@@ -14,6 +14,13 @@ import {
     }))
   }
 
+  export function getQuestions() {
+    return Promise.all([
+      _getQuestions(),
+    ]).then(([questions]) => ({
+      questions,
+    }))
+  }
   export function getInitialData () {
     return Promise.all([
       _getUsers(),

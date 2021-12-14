@@ -20,9 +20,7 @@ function saveAnswer (question) {
 }
 
 export function handleAddQuestion (question) {
-  return (dispatch, getState) => {
-
-
+  return (dispatch) => {
     dispatch(showLoading())
     return saveQuestion(question)
       .then((question) => dispatch(addQuestion(question)))

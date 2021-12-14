@@ -1,45 +1,71 @@
  
 import React, { Component} from 'react'
 import { Link} from 'react-router-dom'
-import {Nav, Image, Button} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import {logoutUser} from '../actions/authedUser'
 import {withRouter} from 'react-router-dom'
+import {activeNavItem} from '../actions/navItem'
+import {  Menu,Image } from 'semantic-ui-react'
 class Navbar extends Component {
+
+  handleItemClick = (e, { name }) => this.props.dispatch(activeNavItem(name))
+  
   handleLogout=()=>{
     const { state } = this.props.location;
     const redirectUrl = state ? state.from.pathname : "/login";
     this.props.dispatch(logoutUser(redirectUrl))
+    this.props.dispatch(activeNavItem(''))
   }
-  render(){
-    console.log(this.props.user)
-  return (
-<Nav variant="tabs" defaultActiveKey="/" as="ul">
-  <Nav.Item >
-    <Nav.Link as={Link} to="/"> Home</Nav.Link>
-  </Nav.Item>
-  <Nav.Item >
-    <Nav.Link as={Link}  to='/add'>New Question</Nav.Link>
-  </Nav.Item>
-  <Nav.Item >
-    <Nav.Link as={Link} to='/leaderboard' >Leader Board</Nav.Link>
-  </Nav.Item>
-  {this.props.user&& (
-      <Nav.Item className='user-info' >
-        <span className='mx-2'>Hello, {this.props.user.name}  </span>
-        <Image className='avater' src={this.props.user.avatarURL}  roundedCircle />
-        <Button size="sm" className='text-danger mx-2' variant="light" onClick={this.handleLogout} >Logout</Button>
-      </Nav.Item>
-  ) }
-</Nav>
 
+  render(){
+    const { activeItem } = this.props
+  return (
+    
+    <Menu pointing secondary >
+    <Menu.Item  as={Link} to='/'
+      name='home'
+      active={activeItem === 'home'}
+      onClick={this.handleItemClick}
+    />
+   
+     <Menu.Item  as={Link} to='/add'
+      name='New Question'
+      active={activeItem === 'New Question'}
+      onClick={this.handleItemClick}
+    />
+     <Menu.Item  as={Link} to='/leaderboard'
+      name='Leader Board'
+      active={activeItem === 'Leader Board'}
+      onClick={this.handleItemClick}
+    /> 
+   {this.props.user && (
+        <Menu.Menu position='right'>
+            <span>Hello, {this.props.user.name} </span>
+            <Image circular src={this.props.user.avatarURL} avatar /> 
+        <Menu.Item
+          name='logout'
+          onClick={this.handleLogout}
+        />
+      </Menu.Menu>
+ ) 
+ //: 
+//  <Menu.Menu position='right'>
+//  <Menu.Item  as={Link} to='/login'
+//  name='login'
+//  active={activeItem === 'login'}
+//  onClick={this.handleItemClick}
+// />
+// </Menu.Menu>
+  }
+ 
+  </Menu>
   )
   }
 } 
-function mapStateToProps( {users,authedUser} ){
+function mapStateToProps( {users,authedUser,Nav} ){
   console.log(users[authedUser.user])
   const user=users[authedUser.user]
-  return {user:user};
+  return {user:user, activeItem: Nav.item};
 }
 
 export default withRouter(connect(mapStateToProps)(Navbar))
