@@ -172,11 +172,17 @@ li {
 .nav{
   justify-content: center;
 }
-.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-  border-color: #a29bfe #a29bfe #a29bfe!important;
-  /* background:#a29bfe; */
+.user-info{
+  margin-left: 120px;
+  display: flex;
+  align-items: center;
+  height: 40px;
 }
-.nav-tabs{
-  border-bottom: 1px solid #a29bfe!important;
+.avater{
+  width: 44px;
+  padding: 4px;
 }
-
+.user-info button{
+  width: auto;
+  text-transform: none;
+}
