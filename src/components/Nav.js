@@ -24,13 +24,13 @@ class Navbar extends Component {
   <Nav.Item >
     <Nav.Link as={Link} to='/leaderboard' >Leader Board</Nav.Link>
   </Nav.Item>
-  {this.props.user && (
+  {this.props.user&& (
       <Nav.Item className='user-info' >
         <span className='mx-2'>Hello, {this.props.user.name}  </span>
         <Image className='avater' src={this.props.user.avatarURL}  roundedCircle />
         <Button size="sm" className='text-danger mx-2' variant="light" onClick={this.handleLogout} >Logout</Button>
       </Nav.Item>
-  )}
+  ) }
 </Nav>
 
   )
