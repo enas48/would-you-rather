@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import { connect } from 'react-redux'
-import { Card, Feed } from 'semantic-ui-react'
+import { Card, Feed, Button } from 'semantic-ui-react'
 class Question extends Component {
 
     render(){
@@ -18,12 +18,12 @@ class Question extends Component {
     <Card.Content>
       <Feed>
         <Feed.Event>
-          <Feed.Label image={this.props.users[author].avatarURL} />
+          <Feed.Label image={this.props.users[author].avatarURL}  />
           <Feed.Content>
             <Feed.Summary>
                 <h5>Would you rather</h5>
                 <p>{text}</p>
-
+                <Button basic color='pink' fluid  >View Poll</Button>
             </Feed.Summary>
           </Feed.Content>
         </Feed.Event>

@@ -43,6 +43,12 @@ button{
 .ui.secondary.pointing.menu .active.item{
   border-color: #e03997!important;
 }
+.ui.feed>.event>.label{
+  width: 5.5em!important;
+}
+.home .item{
+  width: 50%;
+}
 .ghost {
   width: 50%;
   height: 53%;
