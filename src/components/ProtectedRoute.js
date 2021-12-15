@@ -8,12 +8,11 @@ const ProtectedRoute = (props) => {
   const { redirectPath, component, user, loggedIn, ...routeProps} = props;
   const Component = component;
   const isAccessible = Boolean(user) && loggedIn;
-  useEffect((isAccessible) => {
-
-    if(!isAccessible){
+  useEffect(() => {
+    if(!loggedIn){
       props.dispatch(activeNavItem(''))
     }
-  }, [props]);
+  }, [props,loggedIn]);
   return (
     <Route
       {...routeProps}

@@ -10,7 +10,6 @@ export function getQuestions(){
         return getInitialData()
         .then(({questions}) =>{
             dispatch(receiveQuestions(questions))
-
             dispatch(hideLoading())
         })
     }

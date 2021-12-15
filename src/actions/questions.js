@@ -12,10 +12,12 @@ function addQuestion (question) {
   }
 }
 
-function saveAnswer (question) {
+function saveAnswer (user,questionId,answer) {
   return {
     type: SAVE_QUESTION_ANSWER,
-    question,
+    user,
+    questionId,
+    answer
   }
 }
 
@@ -27,12 +29,13 @@ export function handleAddQuestion (question) {
       .then(() => dispatch(hideLoading()))
   }
 }
-export function handleSaveAnswer (question) {
+export function handleSaveAnswer (questionId, answer) {
   return (dispatch, getState) => {
+    const {authedUser } = getState().user;
 
     dispatch(showLoading())
-    return saveQuestionAnswer(question)
-      .then((question) => dispatch(saveAnswer(question)))
+    return saveQuestionAnswer({authedUser, questionId, answer})
+      .then((question) => dispatch(saveAnswer(authedUser,questionId,answer)))
       .then(() => dispatch(hideLoading()))
   }
 }

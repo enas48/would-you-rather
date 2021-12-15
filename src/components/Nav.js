@@ -63,7 +63,7 @@ class Navbar extends Component {
   }
 } 
 function mapStateToProps( {users,authedUser,Nav} ){
-  console.log(users[authedUser.user])
+  // console.log(users[authedUser.user])
   const user=users[authedUser.user]
   return {user:user, activeItem: Nav.item};
 }

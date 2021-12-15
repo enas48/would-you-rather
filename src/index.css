@@ -37,7 +37,12 @@ button{
   margin-top: -40px;
   text-align: center;
 }
-
+.ui.menu .active.item, .ui.menu .item:hover{
+  color: #e03997!important;
+}
+.ui.secondary.pointing.menu .active.item{
+  border-color: #e03997!important;
+}
 .ghost {
   width: 50%;
   height: 53%;
