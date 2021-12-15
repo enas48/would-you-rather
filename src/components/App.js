@@ -1,12 +1,13 @@
 
 import React, { Component, Fragment } from 'react'
-import { Route, Switch,withRouter} from 'react-router-dom'
+import { Route, Switch, withRouter} from 'react-router-dom'
 
 import { connect } from 'react-redux'
  import LoadingBar from 'react-redux-loading-bar'
 import Home from './Home'
 import NewQuestion from './NewQuestion'
 import QuestionPage from './QuestionPage'
+import PollDetails from './PollDetails'
 import LeaderBoard from './LeaderBoard'
 import ProtectedRoute from './ProtectedRoute'
 
@@ -18,17 +19,17 @@ class App extends Component {
   render() {
     
     return (
-
         <Fragment>
-         <LoadingBar /> 
+                <LoadingBar style={{ backgroundColor: '#e03997'}}/> 
         <h2 className='center my-4'>Would you rather!</h2>
         <NavBar/>
-      <div className='container'>
+      <div className='container mt-2'>
               <Switch>
                  <Route  path='/login' exact  component={Login}/>   
                  <ProtectedRoute  path='/' exact  component={Home} />
                  <ProtectedRoute  path='/add' exact component={NewQuestion} />
-                 <ProtectedRoute  path='/question/:question_id' exact  component={QuestionPage} />    
+                 <ProtectedRoute  path='/question/:id' exact  component={QuestionPage} />   
+                    <ProtectedRoute  path='/poll/:id' exact  component={PollDetails} />    
                  <ProtectedRoute  path='/leaderboard' exact  component={LeaderBoard} />  
                  <Route  component={NotFound} />   
                </Switch>

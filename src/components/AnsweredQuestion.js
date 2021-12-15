@@ -9,7 +9,7 @@ class AnsweredQuestion extends Component {
 {Object.entries(this.props.questions)
 .filter(([id])=> this.props.user.answers[id])
 .map(([id,question])=>
-    <Question key={id} question={question}/>
+    <Question key={id} question={question} answered="true"/>
 )}
   </div>
   )

@@ -44,7 +44,8 @@ button{
   border-color: #e03997!important;
 }
 .ui.feed>.event>.label{
-  width: 5.5em!important;
+    width: 10em!important;
+    align-self: center!important;
 }
 .home .item{
   width: 50%;

@@ -1,32 +1,32 @@
 import { RECEIVE_QUESTIONS,  ADD_QUESTION, SAVE_QUESTION_ANSWER} from "../actions/questions"
 
 
-export default function questions(state = {}, action) {
+export default function questions(questions = {}, action) {
   switch(action.type) {
     case RECEIVE_QUESTIONS :
       return {
-        ...state,
+        ...questions,
         ...action.questions
       }
       case ADD_QUESTION :
         return {
-          ...state,
+          ...questions,
           [action.question.id]: action.question
         }
         case SAVE_QUESTION_ANSWER :
-          const {authedUser,questionId,answer} = action.payload
+          const {authedUser,qid,answer} = action
           return {
-            ...state,
-            [questionId]: {
-              ...state[questionId],
+            ...questions,
+            [qid]: {
+              ...questions[qid],
               [answer]: {
-                ...state[questionId][answer],
-                votes: state[questionId][answer].votes.concat([authedUser])
+                ...questions[qid][answer],
+                votes: questions[qid][answer].votes.concat([authedUser])
               }
             }
           }
 
     default :
-      return state
+      return questions
   }
 }
