@@ -5,7 +5,7 @@ export default function users(users={}, action){
     switch (action.type){
         case RECEIVE_USERS:
             return{...users, ...action.users}
-        case ADD_QUESTION :
+            case ADD_QUESTION :
             const{author, id}=action.question
             return {
                 ...users,

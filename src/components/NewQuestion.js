@@ -1,9 +1,31 @@
-import React from 'react'
-import { Card, Form, Button} from 'semantic-ui-react'
+import React,{Component} from 'react'
+import { Card, Form, Button,Divider} from 'semantic-ui-react'
+import  {handleAddQuestion} from '../actions/questions'
+import {   Redirect } from 'react-router-dom'
+import { connect } from "react-redux";
+class NewQuestion extends Component {
+  state={
+    optionOne:'',
+    optionTwo:'',
+    toHome:false
+  }
+  handleChange=(e)=>{
+    this.setState({[e.target.name]:e.target.value})
+  }
+  handleSubmit=(e)=>{
+    e.preventDefault()
+    const{ optionOne, optionTwo}=this.state;
+    const user =this.props.user
+    this.props.dispatch(handleAddQuestion(optionOne, optionTwo, user))     
+    this.setState({ optionOne:'', optionTwo:'',toHome:true})
 
-export default function NewQuestion() {
+  }
+  render(){
+    if(this.state.toHome === true){
+      return <Redirect to='/' />
+  }
   return (
-    <div className="col-md-7 m-auto">
+    <div className="col-md-6 m-auto">
    <Card fluid>
     <Card.Content  textAlign='center' style={{background:'rgba(0,0,0,.05)'}}>
       <Card.Header>Create New Question</Card.Header>
@@ -14,13 +36,15 @@ export default function NewQuestion() {
       <h4>Would you rather ...</h4>
   <Form>
     <Form.Field>
-      <input placeholder='Enter Option One Text Here' />
+      <input placeholder='Enter Option One Text Here' name="optionOne" value={this.state.optionOne}  onChange={this.handleChange}/>
     </Form.Field>
-    <p className='line-through' ><span>OR</span></p>
+
+    <Divider horizontal >Or</Divider>
     <Form.Field>
-      <input placeholder='Enter Option Two Text Here' />
+      <input placeholder='Enter Option Two Text Here' name="optionTwo" value={this.state.optionTwo} onChange={this.handleChange}/>
     </Form.Field>
-    <Button basic color='pink' type='submit' fluid>Submit</Button>
+    <Button basic color='pink' type='submit' fluid onClick={this.handleSubmit}
+    disabled={this.state.optionOne===''||this.state.optionTwo===''}>Submit</Button>
   </Form>
    
       </Card.Description>
@@ -28,5 +52,13 @@ export default function NewQuestion() {
   </Card>
   </div>
   )
+  }
 } 
+
+function mapStateToProps({ authedUser}) {
+  return {user:authedUser.user};
+}
+
+export default connect(mapStateToProps)(NewQuestion);
+
   

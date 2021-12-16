@@ -6,18 +6,22 @@ class AnsweredQuestion extends Component {
   return (
   <div>
 
-{Object.entries(this.props.questions)
-.filter(([id])=> this.props.user.answers[id])
-.map(([id,question])=>
-    <Question key={id} question={question} answered="true"/>
-)}
+{this.props.questions
+.filter((id)=> 
+this.props.user.answers[id])
+
+ .map((id)=>
+     <Question key={id} id={id} answered="true"/>
+ )
+}
   </div>
   )
     }
 } 
 function mapStateToProps( {users,authedUser,questions} ){
     const user=users[authedUser.user]
-    return {user:user, questions:questions};
+    return {user:user, questions:Object.keys(questions)
+      .sort((a,b) => questions[b].timestamp - questions[a].timestamp)};
   }
   
   export default connect(mapStateToProps)(AnsweredQuestion) 

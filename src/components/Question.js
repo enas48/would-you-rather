@@ -18,12 +18,12 @@ class Question extends Component {
   }
 
     render(){
- 
-        let text=this.props.question.optionOne.text;
+        const question= this.props.questions[this.props.id]
+        let text=question.optionOne.text;
         if(text.length > 13){
          text =  '...' + text.substr(0, 13) + '...'    
         }
-        let author=this.props.question.author
+        let author=question.author
   return (
 
     <Card fluid>
@@ -35,10 +35,11 @@ class Question extends Component {
         <Feed.Event>
           <Feed.Label image={this.props.users[author].avatarURL}  />
           <Feed.Content>
+            
             <Feed.Summary>
                 <h5>Would you rather</h5>
                 <p>{text}</p>
-                <Button basic color='pink' fluid  onClick={(e) => this.toQuestion(e, this.props.question.id)}>View Poll</Button>
+                <Button basic color='pink' fluid  onClick={(e) => this.toQuestion(e, question.id)}>View Poll</Button>
             </Feed.Summary>
           </Feed.Content>
         </Feed.Event>
@@ -50,9 +51,9 @@ class Question extends Component {
     }
 } 
 
-function mapStateToProps( {users} ){
+function mapStateToProps( {users, questions},id ){
 
-    return {users:users};
+    return {users,questions};
   }
   
   export default withRouter(connect(mapStateToProps)(Question)) 

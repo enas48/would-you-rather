@@ -39,7 +39,7 @@ class Navbar extends Component {
       onClick={this.handleItemClick}
     /> 
    {this.props.user && (
-        <Menu.Menu position='right'>
+        <Menu.Menu position='right' className="nav-mob">
             <span>Hello, {this.props.user.name} </span>
             <Image circular src={this.props.user.avatarURL} avatar /> 
         <Menu.Item
@@ -48,14 +48,7 @@ class Navbar extends Component {
         />
       </Menu.Menu>
  ) 
- //: 
-//  <Menu.Menu position='right'>
-//  <Menu.Item  as={Link} to='/login'
-//  name='login'
-//  active={activeItem === 'login'}
-//  onClick={this.handleItemClick}
-// />
-// </Menu.Menu>
+
   }
  
   </Menu>

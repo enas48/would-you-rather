@@ -2,9 +2,9 @@ import React, { Component} from 'react'
 import { Card, Feed, Button , Form, Checkbox } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import  {handleSaveAnswer} from '../actions/questions'
-
+import {   Redirect } from 'react-router-dom'
 class QuestionPage extends Component {
-    state = {value: 'optionOne'}
+    state = {value: '', toPoll:false}
   handleChange = (e, { value }) =>{
    this.setState({ value })
 }
@@ -13,14 +13,18 @@ class QuestionPage extends Component {
        const questionId=this.props.match.params.id
        const answer=this.state.value
        const user =this.props.user
-       this.props.dispatch(handleSaveAnswer(user,questionId,answer))
-       this.props.history.push(`/poll/${questionId}`)
+       this.props.dispatch(handleSaveAnswer(user,questionId,answer))     
+       this.setState({value: '', toPoll:true})
+
 }
   render(){
       const questionId=this.props.match.params.id
       const question= this.props.questions[questionId]
+      if(this.state.toPoll === true){
+        return <Redirect to={`/poll/${questionId}`} />
+    }
   return (
-    <div className="col-md-7 m-auto">
+    <div className="col-md-6 m-auto">
     <Card fluid >
     <Card.Content style={{background:'rgba(0,0,0,.05)'}}>
       <Card.Header> {question.author} asks:</Card.Header>
@@ -56,7 +60,7 @@ class QuestionPage extends Component {
           />
         </Form.Field>
       </Form>
-                <Button basic color='pink' fluid  onClick={this.handleSubmit}>Submit</Button>
+                <Button basic color='pink' fluid  onClick={this.handleSubmit} disabled={this.state.value ===''}>Submit</Button>
             </Feed.Summary>
           </Feed.Content>
         </Feed.Event>

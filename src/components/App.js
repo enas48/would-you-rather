@@ -34,6 +34,7 @@ class App extends Component {
                  <ProtectedRoute  path='/question/:id' exact  component={QuestionPage} />   
                     <ProtectedRoute  path='/poll/:id' exact  component={PollDetails} />    
                  <ProtectedRoute  path='/leaderboard' exact  component={LeaderBoard} />  
+                 <Route path='/404' exact component={NotFound} /> 
                  <Route  component={NotFound} />   
                </Switch>
       </div>

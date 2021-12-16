@@ -21,10 +21,10 @@ function saveAnswer (user,qid,answer) {
   }
 }
 
-export function handleAddQuestion (question) {
+export function handleAddQuestion (optionOneText, optionTwoText, author) {
   return (dispatch) => {
     dispatch(showLoading())
-    return saveQuestion(question)
+    return saveQuestion({ optionOneText, optionTwoText, author })
       .then((question) => dispatch(addQuestion(question)))
       .then(() => dispatch(hideLoading()))
   }
