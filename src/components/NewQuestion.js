@@ -3,17 +3,20 @@ import { Card, Form, Button} from 'semantic-ui-react'
 
 export default function NewQuestion() {
   return (
-   <Card className="m-auto">
-    <Card.Content  textAlign='center'>
+    <div className="col-md-7 m-auto">
+   <Card fluid>
+    <Card.Content  textAlign='center' style={{background:'rgba(0,0,0,.05)'}}>
       <Card.Header>Create New Question</Card.Header>
+      </Card.Content>
+      <Card.Content  >
       <Card.Description>
-      <span>Complete the question:</span>
+      <span><b>Complete the question:</b></span>
       <h4>Would you rather ...</h4>
   <Form>
     <Form.Field>
       <input placeholder='Enter Option One Text Here' />
     </Form.Field>
-    <p style={{color: '#e03997'}}>OR</p>
+    <p className='line-through' ><span>OR</span></p>
     <Form.Field>
       <input placeholder='Enter Option Two Text Here' />
     </Form.Field>
@@ -23,6 +26,7 @@ export default function NewQuestion() {
       </Card.Description>
     </Card.Content>
   </Card>
+  </div>
   )
 } 
   

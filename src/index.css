@@ -50,6 +50,22 @@ button{
 .home .item{
   width: 50%;
 }
+
+
+.line-through {
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid #e03997;
+  line-height: 0.1em;
+  margin: 30px 0!important; 
+} 
+
+.line-through span { 
+   background:#fff; 
+   padding:0 10px; 
+   color: #e03997;
+}
+
 .ghost {
   width: 50%;
   height: 53%;

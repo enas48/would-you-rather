@@ -4,27 +4,14 @@ import { receiveQuestions} from './questions';
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 
-export function getQuestions(){
+export function handleInitialData(){
     return (dispatch)=>{
         dispatch(showLoading())
         return getInitialData()
-        .then(({questions}) =>{
+        .then(({questions, users}) =>{
             dispatch(receiveQuestions(questions))
-            dispatch(hideLoading())
-        })
-    }
-    
-}
-
-
-export function getUsers(){
-    return (dispatch)=>{
-        dispatch(showLoading())
-        return getInitialData()
-        .then(({users}) =>{
             dispatch(receiveUsers(users))
             dispatch(hideLoading())
         })
     }
-    
 }

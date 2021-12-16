@@ -1,14 +1,11 @@
 import React, {Component} from 'react'
-import { getUsers,getQuestions} from '../actions/shared'
 import {authenticate} from '../actions/authedUser'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import { Dropdown,Form,Card,Button } from 'semantic-ui-react'
 import {activeNavItem} from '../actions/navItem'
 class Login extends Component {
-  componentDidMount() {
-    this.props.dispatch(getUsers())
-  }
+
   state={
     authedUser:""
   }
@@ -22,7 +19,6 @@ class Login extends Component {
     const redirectUrl = state ? state.from.pathname : "/";
     this.props.dispatch(authenticate(this.state.authedUser, redirectUrl))
     this.props.dispatch(activeNavItem('home'))
-    this.props.dispatch(getQuestions())
   }
   render() {
   return (

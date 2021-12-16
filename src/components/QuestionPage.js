@@ -13,9 +13,8 @@ class QuestionPage extends Component {
        const questionId=this.props.match.params.id
        const answer=this.state.value
        const user =this.props.user
-
-   this.props.dispatch(handleSaveAnswer(user,questionId,answer))
-
+       this.props.dispatch(handleSaveAnswer(user,questionId,answer))
+       this.props.history.push(`/poll/${questionId}`)
 }
   render(){
       const questionId=this.props.match.params.id

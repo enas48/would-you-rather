@@ -1,7 +1,7 @@
 
 import React, { Component, Fragment } from 'react'
 import { Route, Switch, withRouter} from 'react-router-dom'
-
+import { handleInitialData} from '../actions/shared'
 import { connect } from 'react-redux'
  import LoadingBar from 'react-redux-loading-bar'
 import Home from './Home'
@@ -15,6 +15,9 @@ import NavBar from './Nav'
 import Login from './Login'
 import NotFound from './NotFound'
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData())
+  }
 
   render() {
     
