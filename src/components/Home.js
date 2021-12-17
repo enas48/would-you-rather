@@ -16,7 +16,7 @@ import UnansweredQuestion from "./UnansweredQuestion";
 
     ]
   return (
-  <div className="col-md-6 m-auto home pb-4">
+  <div className="col-lg-6 col-md-8 m-auto home pb-4">
       <Tab menu={{ attached: false }} panes={panes} />
   </div> 
   )

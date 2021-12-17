@@ -1,9 +1,11 @@
 // import { saveLikeToggle, saveTweet } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import {saveQuestion, saveQuestionAnswer} from '../utils/api'
+import {saveUserAnswer} from './users'
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER'
+
 
 function addQuestion (question) {
   return {
@@ -12,10 +14,10 @@ function addQuestion (question) {
   }
 }
 
-function saveAnswer (user,qid,answer) {
+function saveAnswer (authedUser,qid,answer) {
   return {
     type: SAVE_QUESTION_ANSWER,
-    authedUser:user,
+    authedUser,
     qid,
     answer
   }
@@ -31,11 +33,15 @@ export function handleAddQuestion (optionOneText, optionTwoText, author) {
 }
 export function handleSaveAnswer (authedUser,qid, answer) {
   return (dispatch) => {
+
     dispatch(showLoading())
     return saveQuestionAnswer({authedUser, qid, answer})
-      .then(() => dispatch(saveAnswer(authedUser,qid,answer)))
+      .then(() => {dispatch(saveAnswer(authedUser,qid,answer))
+                dispatch(saveUserAnswer(authedUser,qid,answer))
+      })
       .then(() => dispatch(hideLoading()))
-  }
+ 
+    }
 }
 
 export function receiveQuestions (questions) {

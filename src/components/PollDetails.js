@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Card, Feed, Label,Progress } from "semantic-ui-react";
  import { connect } from "react-redux";
-//  import {   Redirect } from 'react-router-dom'
+ import {   withRouter } from 'react-router-dom'
 class PollDetails extends Component {
+
   render() {
-    const questionId = this.props.match.params.id;
+    const questionId = this.props.id;
     const question = this.props.questions[questionId];
     const author = this.props.users[question.author];
     const authorAnswer = this.props.user.answers[questionId];
@@ -22,12 +23,13 @@ class PollDetails extends Component {
     };
 
   //   const poll= Object.keys(this.props.user.answers).includes(questionId)
+  //   console.log(poll)
   //   if(!poll){
   //     return <Redirect to='/404' />
   // }
-
+if(Object.keys(this.props.user.answers).includes(questionId)){
     return (
-      <div className="col-md-6 m-auto">
+      <div className="col-lg-6 col-md-8 m-auto">
         <Card fluid>
           <Card.Content style={{ background: "rgba(0,0,0,.05)" }}>
             <Card.Header>Asked by {question.author}</Card.Header>
@@ -91,11 +93,14 @@ class PollDetails extends Component {
           </Card.Content>
         </Card>
       </div>
-    );
+    )
+                        }else{
+                          return<div></div>
+                        }
   }
 }
-function mapStateToProps({ users, questions ,authedUser}) {
+function mapStateToProps({ users, questions ,authedUser},id) {
   return { questions, users ,user:users[authedUser.user]};
 }
 
-export default connect(mapStateToProps)(PollDetails);
+export default withRouter(connect(mapStateToProps)(PollDetails));

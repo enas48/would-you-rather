@@ -7,21 +7,24 @@ import {activeNavItem} from '../actions/navItem'
 class Question extends Component {
   toQuestion=(e, qId)=>{
         this.props.dispatch(activeNavItem(''))
-    if(this.props.answered ==='true'){
-         e.preventDefault()
-     this.props.history.push(`/poll/${qId}`)
-    }
-     if(this.props.answered ==='false'){
-          e.preventDefault()
-          this.props.history.push(`/question/${qId}`)
-    }
+    // if(this.props.answered ==='true'){
+    //      e.preventDefault()
+    //  this.props.history.push(`/poll/${qId}`)
+    // }
+    //  if(this.props.answered ==='false'){
+    //       e.preventDefault()
+    //       this.props.history.push(`/questions/${qId}`)
+    // }
+    this.props.history.push(`/questions/${qId}`)
   }
 
     render(){
         const question= this.props.questions[this.props.id]
         let text=question.optionOne.text;
-        if(text.length > 13){
-         text =  '...' + text.substr(0, 13) + '...'    
+        if(text.length > 11){
+         text =  '...' + text.substr(0, 10) + '...'    
+        }else{
+          text =  '...' + text.substr(0, text.length) + '...'    
         }
         let author=question.author
   return (

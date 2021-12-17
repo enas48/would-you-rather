@@ -24,7 +24,7 @@ let users = {
   johndoe: {
     id: 'johndoe',
     name: 'John Doe',
-    avatarURL: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg',
+    avatarURL: 'https://semantic-ui.com/images/avatar2/small/elyse.png',
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',

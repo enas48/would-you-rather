@@ -38,10 +38,8 @@ button{
   border-color: #e03997!important;
 }
 .ui.feed>.event>.label{
-    width: 10em!important;
+    width: 9em!important;
     align-self: center!important;
-    /* border-right: 1px solid #22242626;
-    padding-right: 10px; */
 }
 .ui.feed>.event:last-child>.content {
   margin: 0.5em 0 0.35714286em 1.14285714em;
@@ -52,6 +50,38 @@ padding-left: 10px;
 }
 .custom-card .ui.card:last-child,.custom-card .ui.card:first-child{
   margin-bottom: 1.4em!important;
+}
+.user-board .summary{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.user-board .ui.feed>.event>.label{
+  width: 6em!important;
+}
+.user-board .description{
+  display: flex;
+  justify-content: space-between;
+}
+.user-board .ui.label{
+color: #E8E8E8;
+}
+.leader-board .ui.card .trophy {
+color:  #000;
+}
+.leader-board .ui.card:first-child .trophy {
+color: #fbbd08;
+}
+.leader-board .ui.card:nth-child(2) .trophy{
+  color: #21BA45;
+}
+.leader-board .ui.card:nth-child(3) .trophy{
+  color:  #585959;
+}
+
+.feed-summary{
+  width: 0;
 }
 .custom-card{
   display: flex;
@@ -76,14 +106,7 @@ padding-left: 10px;
   justify-content: center;
 }
 
-@media only screen and (max-width: 480px){
-  .nav-mob span{
-    display: none;
-  }
-  .ui.secondary.pointing.menu .item{
-    padding: 10px!important;
-  }
-}
+
 
 
 .ghost {
@@ -248,4 +271,16 @@ footer {
   padding: 10px;
   color: #EA7996;
   letter-spacing: 3px;
+}
+@media only screen and (max-width: 480px){
+  .nav-mob span{
+    display: none;
+  }
+  .ui.secondary.pointing.menu .item{
+    padding: 10px!important;
+  }
+  .feed-summary{
+    border-left: 0!important;
+    width: 100%;
+  }
 }

@@ -3,6 +3,7 @@ import { Card, Form, Button,Divider} from 'semantic-ui-react'
 import  {handleAddQuestion} from '../actions/questions'
 import {   Redirect } from 'react-router-dom'
 import { connect } from "react-redux";
+import {activeNavItem} from '../actions/navItem'
 class NewQuestion extends Component {
   state={
     optionOne:'',
@@ -17,6 +18,7 @@ class NewQuestion extends Component {
     const{ optionOne, optionTwo}=this.state;
     const user =this.props.user
     this.props.dispatch(handleAddQuestion(optionOne, optionTwo, user))     
+    this.props.dispatch(activeNavItem('home'))
     this.setState({ optionOne:'', optionTwo:'',toHome:true})
 
   }
@@ -25,7 +27,7 @@ class NewQuestion extends Component {
       return <Redirect to='/' />
   }
   return (
-    <div className="col-md-6 m-auto">
+    <div className="col-lg-6 col-md-8 m-auto">
    <Card fluid>
     <Card.Content  textAlign='center' style={{background:'rgba(0,0,0,.05)'}}>
       <Card.Header>Create New Question</Card.Header>

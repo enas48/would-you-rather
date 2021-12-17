@@ -11,7 +11,7 @@ class AnsweredQuestion extends Component {
 this.props.user.answers[id])
 
  .map((id)=>
-     <Question key={id} id={id} answered="true"/>
+     <Question key={id} id={id} />
  )
 }
   </div>
