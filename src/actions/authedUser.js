@@ -1,11 +1,10 @@
 import history from "../components/history";
-export const LOGIN ='LOGIN';
-export const LOGOUT = 'LOGOUT'
-
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
 
 export const authenticate = (user, redirectUrl) => (dispatch) => {
-    dispatch(logIn(user));
-    history.push(redirectUrl);
+  dispatch(logIn(user));
+  history.push(redirectUrl);
 };
 
 export const logoutUser = (redirectUrl) => (dispatch) => {
@@ -14,14 +13,14 @@ export const logoutUser = (redirectUrl) => (dispatch) => {
 };
 
 export const logIn = (user) => {
-    return {
-      type: LOGIN,
-     user
-    }
-  }
-  
-  export const logOut = () => {
-    return {
-      type: LOGOUT
-    }
-  }
+  return {
+    type: LOGIN,
+    user,
+  };
+};
+
+export const logOut = () => {
+  return {
+    type: LOGOUT,
+  };
+};

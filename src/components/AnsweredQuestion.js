@@ -4,18 +4,14 @@ import Question from './Question'
 class AnsweredQuestion extends Component {
     render(){
   return (
-  <div>
-
-{this.props.questions
-.filter((id)=> 
-this.props.user.answers[id])
-
- .map((id)=>
-     <Question key={id} id={id} />
- )
-}
-  </div>
-  )
+    <div>
+      {this.props.questions
+        .filter((id) => this.props.user.answers[id])
+        .map((id) => (
+          <Question key={id} id={id} />
+        ))}
+    </div>
+  );
     }
 } 
 function mapStateToProps( {users,authedUser,questions} ){

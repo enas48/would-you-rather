@@ -7,10 +7,10 @@ export function receiveUsers(users){
     }
 }
 export function saveUserAnswer (authedUser,qid,answer) {
-    return {
-      type: SAVE_USER_ANSWER,
-      authedUser,
-      qid,
-      answer
-    }
-  }
+  return {
+    type: SAVE_USER_ANSWER,
+    authedUser,
+    qid,
+    answer,
+  };
+}

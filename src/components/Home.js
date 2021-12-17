@@ -7,7 +7,7 @@ import UnansweredQuestion from "./UnansweredQuestion";
     const panes = [
       {
         menuItem: 'Unanswered Questions',
-        render: () => <Tab.Pane attached={false}> < UnansweredQuestion/></Tab.Pane>,
+        render: () => <Tab.Pane attached={false}><UnansweredQuestion/></Tab.Pane>,
       },
       {
         menuItem: 'Answered Questions',
@@ -22,7 +22,6 @@ import UnansweredQuestion from "./UnansweredQuestion";
   )
 }
 } 
-
 
 export default Home
   

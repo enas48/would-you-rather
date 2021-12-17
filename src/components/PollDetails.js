@@ -5,10 +5,11 @@ import { Card, Feed, Label,Progress } from "semantic-ui-react";
 class PollDetails extends Component {
 
   render() {
-    const questionId = this.props.id;
-    const question = this.props.questions[questionId];
-    const author = this.props.users[question.author];
-    const authorAnswer = this.props.user.answers[questionId];
+    const {id,questions,users,user}=this.props
+    const questionId = id;
+    const question = questions[questionId];
+    const author = users[question.author];
+    const authorAnswer = user.answers[questionId];
     const optiononeVotes = question.optionOne.votes.length;
     const optiontwoVotes = question.optionTwo.votes.length;
     const votes = question.optionOne.votes.length + question.optionTwo.votes.length;
@@ -22,12 +23,7 @@ class PollDetails extends Component {
       backgroundColor: optiononeVotes > optiontwoVotes ? "#fff" : "#ffcccc",
     };
 
-  //   const poll= Object.keys(this.props.user.answers).includes(questionId)
-  //   console.log(poll)
-  //   if(!poll){
-  //     return <Redirect to='/404' />
-  // }
-if(Object.keys(this.props.user.answers).includes(questionId)){
+if(Object.keys(user.answers).includes(questionId)){
     return (
       <div className="col-lg-6 col-md-8 m-auto">
         <Card fluid>

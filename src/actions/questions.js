@@ -1,54 +1,39 @@
-// import { saveLikeToggle, saveTweet } from '../utils/api'
-import { showLoading, hideLoading } from 'react-redux-loading-bar'
-import {saveQuestion, saveQuestionAnswer} from '../utils/api'
-import {saveUserAnswer} from './users'
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const ADD_QUESTION = 'ADD_QUESTION'
-export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER'
 
+import { showLoading, hideLoading } from "react-redux-loading-bar";
+import { saveQuestion} from "../utils/api";
+export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
+export const ADD_QUESTION = "ADD_QUESTION";
+export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER";
 
-function addQuestion (question) {
+function addQuestion(question) {
   return {
     type: ADD_QUESTION,
     question,
-  }
+  };
 }
 
-function saveAnswer (authedUser,qid,answer) {
+export function saveAnswer(authedUser, qid, answer) {
   return {
     type: SAVE_QUESTION_ANSWER,
     authedUser,
     qid,
-    answer
-  }
+    answer,
+  };
 }
 
-export function handleAddQuestion (optionOneText, optionTwoText, author) {
+export function handleAddQuestion(optionOneText, optionTwoText, author) {
   return (dispatch) => {
-    dispatch(showLoading())
+    dispatch(showLoading());
     return saveQuestion({ optionOneText, optionTwoText, author })
       .then((question) => dispatch(addQuestion(question)))
-      .then(() => dispatch(hideLoading()))
-  }
-}
-export function handleSaveAnswer (authedUser,qid, answer) {
-  return (dispatch) => {
-
-    dispatch(showLoading())
-    return saveQuestionAnswer({authedUser, qid, answer})
-      .then(() => {dispatch(saveAnswer(authedUser,qid,answer))
-                dispatch(saveUserAnswer(authedUser,qid,answer))
-      })
-      .then(() => dispatch(hideLoading()))
- 
-    }
+      .then(() => dispatch(hideLoading()));
+  };
 }
 
-export function receiveQuestions (questions) {
+
+export function receiveQuestions(questions) {
   return {
     type: RECEIVE_QUESTIONS,
     questions,
-  }
+  };
 }
-
-

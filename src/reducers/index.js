@@ -6,9 +6,9 @@ import Nav from './navItem';
 import { loadingBarReducer } from 'react-redux-loading-bar'
 
 export default combineReducers({
-    authedUser,
-    questions,
-    users,
-    Nav,
-    loadingBar: loadingBarReducer,
-})
+  authedUser,
+  questions,
+  users,
+  Nav,
+  loadingBar: loadingBarReducer,
+});

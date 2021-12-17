@@ -3,30 +3,22 @@ import { connect } from 'react-redux'
 import { Card, Feed, Button } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import {activeNavItem} from '../actions/navItem'
-
+import history from "../components/history";
 class Question extends Component {
   toQuestion=(e, qId)=>{
         this.props.dispatch(activeNavItem(''))
-    // if(this.props.answered ==='true'){
-    //      e.preventDefault()
-    //  this.props.history.push(`/poll/${qId}`)
-    // }
-    //  if(this.props.answered ==='false'){
-    //       e.preventDefault()
-    //       this.props.history.push(`/questions/${qId}`)
-    // }
-    this.props.history.push(`/questions/${qId}`)
+        history.push(`/questions/${qId}`)
   }
 
     render(){
-        const question= this.props.questions[this.props.id]
+        const question = this.props.questions[this.props.id];
+        let author = question.author
         let text=question.optionOne.text;
         if(text.length > 11){
          text =  '...' + text.substr(0, 10) + '...'    
         }else{
           text =  '...' + text.substr(0, text.length) + '...'    
         }
-        let author=question.author
   return (
 
     <Card fluid>
@@ -37,8 +29,7 @@ class Question extends Component {
       <Feed>
         <Feed.Event>
           <Feed.Label image={this.props.users[author].avatarURL}  />
-          <Feed.Content>
-            
+          <Feed.Content>        
             <Feed.Summary>
                 <h5>Would you rather</h5>
                 <p>{text}</p>
@@ -55,7 +46,6 @@ class Question extends Component {
 } 
 
 function mapStateToProps( {users, questions},id ){
-
     return {users,questions};
   }
   

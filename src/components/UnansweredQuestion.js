@@ -2,18 +2,16 @@ import React, { Component} from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
 class UnansweredQuestion extends Component {
-    render(){
-      
+    render(){   
   return (
-  <div>
-{this.props.questions
-.filter((id)=> !this.props.user.answers[id])
- .map((id)=>
-     <Question key={id} id={id}/>
- )
-}
-  </div>
-  )
+    <div>
+      {this.props.questions
+        .filter((id) => !this.props.user.answers[id])
+        .map((id) => (
+          <Question key={id} id={id} />
+        ))}
+    </div>
+  );
     }
 } 
 function mapStateToProps( {users,authedUser,questions} ){

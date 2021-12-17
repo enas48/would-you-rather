@@ -4,7 +4,7 @@ export default function authedUser(state={loggedIn:false,user: null}, action){
         case LOGIN:
             return {...state,loggedIn:true, user:action.user}
          case LOGOUT:
-            return {...state,loggedIn:false, user:null}  
+            return { ...state, loggedIn: false, user: null };  
             default :
             return state
     }
