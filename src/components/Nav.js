@@ -6,6 +6,7 @@ import {logoutUser} from '../actions/authedUser'
 import {withRouter} from 'react-router-dom'
 import {activeNavItem} from '../actions/navItem'
 import {  Menu,Image } from 'semantic-ui-react'
+import PropTypes from 'prop-types';
 class Navbar extends Component {
   handleItemClick = (e, { name }) => this.props.dispatch(activeNavItem(name))
   handleLogout=()=>{
@@ -58,4 +59,9 @@ function mapStateToProps( {users,authedUser,Nav} ){
 }
 
 export default withRouter(connect(mapStateToProps)(Navbar))
+
+Navbar.propTypes = {
+  user:PropTypes.object,
+  activeItem:PropTypes.string
+};
   

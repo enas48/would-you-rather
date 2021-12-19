@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import { Dropdown,Form,Card,Button } from 'semantic-ui-react'
 import {activeNavItem} from '../actions/navItem'
+import PropTypes from 'prop-types';
 class Login extends Component {
   state = {
     authedUser: "",
@@ -16,11 +17,32 @@ class Login extends Component {
     e.preventDefault();
     const { state } = this.props.location;
     const redirectUrl = state ? state.from.pathname : "/";
+    let activeItem ;
+    if(state){
+      let pathname= state.from.pathname
+      if(pathname==='/'){
+        activeItem = 'home'
+      }
+      if(pathname==='/add'){
+        activeItem = 'New Question'
+      }
+      if(pathname==='/leaderboard'){
+        activeItem = 'Leader Board'
+      }
+      
+    }else{
+      activeItem ='home'
+    }
+ 
     this.props.dispatch(authenticate(this.state.authedUser, redirectUrl));
-    this.props.dispatch(activeNavItem("home"));
+    this.props.dispatch(activeNavItem(activeItem));
   };
-  
+  componentDidMount(){
+    console.log(this.props.location.state)
+
+  }
   render() {
+
     return (
       <Card className="m-auto">
         <Card.Content textAlign="center">
@@ -67,3 +89,6 @@ function mapStateToProps( {users} ){
 }
 
 export default withRouter(connect(mapStateToProps)(Login)) 
+Login.propTypes = {
+  users:PropTypes.array,
+};

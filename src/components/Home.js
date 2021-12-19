@@ -1,9 +1,9 @@
-import React, { Component} from 'react'
+import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import AnsweredQuestion from './AnsweredQuestion'
 import UnansweredQuestion from "./UnansweredQuestion";
- class Home extends Component{
-   render(){
+function Home(){
+ 
     const panes = [
       {
         menuItem: 'Unanswered Questions',
@@ -21,7 +21,7 @@ import UnansweredQuestion from "./UnansweredQuestion";
   </div> 
   )
 }
-} 
+
 
 export default Home
   

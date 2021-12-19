@@ -19,9 +19,9 @@ import './index.css';
   const initialState = StateCacheStorage.get("APP_STATE");
   const composeEnhancers = compose;
 const store =createStore(reducer, initialState,composeEnhancers(middleware));
-store.subscribe(() => {
-    StateCacheStorage.set("APP_STATE", store.getState());
-  });
+// store.subscribe(() => {
+//     StateCacheStorage.set("APP_STATE", store.getState());
+//   });
 
 ReactDOM.render(
 <Provider store={store} >

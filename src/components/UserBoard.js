@@ -1,11 +1,9 @@
-import React, { Component} from 'react'
+import React from 'react'
 import { Card, Feed,Segment,Label,Header} from 'semantic-ui-react'
 
 
-class UserBoard extends Component {
- 
-    render(){
-        const {user}=this.props
+function UserBoard(props) {
+        const {user}=props
         const answerdQustions=Object.keys(user.answers).length
         const createdQuestions=user.questions.length
         const total=answerdQustions + createdQuestions
@@ -48,7 +46,7 @@ class UserBoard extends Component {
       </Card.Content>
     </Card>
   );
-    }
+
 } 
   
   export default UserBoard

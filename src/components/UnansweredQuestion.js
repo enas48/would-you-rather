@@ -1,18 +1,18 @@
-import React, { Component} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
-class UnansweredQuestion extends Component {
-    render(){   
+import PropTypes from 'prop-types';
+function UnansweredQuestion(props) {
   return (
     <div>
-      {this.props.questions
-        .filter((id) => !this.props.user.answers[id])
+      {props.questions
+        .filter((id) => !props.user.answers[id])
         .map((id) => (
           <Question key={id} id={id} />
         ))}
     </div>
   );
-    }
+    
 } 
 function mapStateToProps( {users,authedUser,questions} ){
   const user=users[authedUser.user]
@@ -20,3 +20,10 @@ function mapStateToProps( {users,authedUser,questions} ){
     .sort((a,b) => questions[b].timestamp - questions[a].timestamp)};
 }
   export default connect(mapStateToProps)(UnansweredQuestion) 
+
+  UnansweredQuestion.propTypes = {
+    user:PropTypes.object,
+    questions:PropTypes.array
+  }; 
+
+  

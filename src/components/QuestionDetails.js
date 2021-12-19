@@ -3,7 +3,7 @@ import { Card, Feed, Button , Form, Checkbox } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import  {handleSaveAnswer} from '../actions/shared'
 import {   Redirect } from 'react-router-dom'
-
+import PropTypes from 'prop-types';
 class QuestionDetails extends Component {
   state = { value: "", toPoll: false };
   handleChange = (e, { value }) => {
@@ -91,5 +91,11 @@ function mapStateToProps( {users,authedUser,questions} ,id){
   }
   
   export default connect(mapStateToProps)(QuestionDetails) 
+  
+  QuestionDetails.propTypes = {
+    user:PropTypes.string,
+    users:PropTypes.object,
+    questions:PropTypes.object
+  }; 
 
   

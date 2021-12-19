@@ -17,8 +17,9 @@ const ProtectedRoute = (props) => {
     <Route
       {...routeProps}
       render={props => {
-        if (isAccessible) return <Component {...props} />;
-        return <Redirect to={{ pathname: redirectPath || "/Login" }} />;
+        if (isAccessible) return <Component {...props} />
+        
+        return <Redirect to={{ pathname: "/Login", state: { from: props.location }}} />
       }}
     />
   );

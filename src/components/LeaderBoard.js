@@ -1,10 +1,10 @@
-import React, { Component} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import UserBoard from './UserBoard'
+import PropTypes from 'prop-types';
+function LeaderBoard (props) {
 
-class LeaderBoard extends Component {
-    render(){
-      const users = this.props.users;
+      const users = props.users;
       return (
         <div className="col-lg-6 col-md-8 m-auto leader-board">
           {users.map((user) => (
@@ -12,7 +12,7 @@ class LeaderBoard extends Component {
           ))}
         </div>
       );
-    }
+    
 } 
 
 function mapStateToProps( {users, questions} ){
@@ -28,5 +28,8 @@ function mapStateToProps( {users, questions} ){
 
   return { users: allusers, questions };
 }
-  
   export default connect(mapStateToProps)(LeaderBoard)
+
+  LeaderBoard.propTypes = {
+    users:PropTypes.array
+  };

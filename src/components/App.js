@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { handleInitialData } from "../actions/shared";
 import { connect } from "react-redux";
 import LoadingBar from "react-redux-loading-bar";
@@ -30,8 +30,8 @@ class App extends Component {
             <ProtectedRoute path="/add" exact component={NewQuestion} />  
             <ProtectedRoute path="/leaderboard" exact component={LeaderBoard} />
             <ProtectedRoute  path="/questions/:id"  exact component={QuestionPage}/>       
-            <ProtectedRoute path="/404" exact component={NotFound} />
-            <Route component={NotFound} />
+            <Route component={NotFound}   />
+            
           </Switch>
         </div>
       </Fragment>
@@ -39,10 +39,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
-  return {
-    authedUser,
-  };
-}
 
-export default withRouter(connect(mapStateToProps)(App));
+export default connect()(App);

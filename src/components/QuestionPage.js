@@ -1,29 +1,36 @@
-import React, { Component} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import QuestionDetails from './QuestionDetails'
 import PollDetails from './PollDetails'
-import {   Redirect,withRouter } from 'react-router-dom'
-import history from "../components/history";
-class QuestionPage extends Component {
+import NotFound from "./NotFound";
+import PropTypes from 'prop-types';
 
-  render(){
-    const{user,questions} = this.props;
-    const questionId = this.props.match.params.id;
+function QuestionPage (props){
+
+    const{user,questions} = props;
+    const questionId = props.match.params.id;
     if (!Object.keys(questions).includes(questionId)) {
-       return <Redirect to="/404" />;
+       return <NotFound />;
     }
     if (Object.keys(user.answers).includes(questionId)) {
       return <PollDetails id={questionId} />;
     } else {
       return <QuestionDetails id={questionId} />;
     }
-  } 
+  
 }
 function mapStateToProps( {users,authedUser,questions} ){
     const user=users[authedUser.user]
     return {user:user, questions,users};
   }
   
-  export default withRouter(connect(mapStateToProps)(QuestionPage)) 
+  export default connect(mapStateToProps)(QuestionPage)
+
+  QuestionPage.propTypes = {
+    user:PropTypes.string,
+    users:PropTypes.object,
+    questions:PropTypes.object
+  }; 
+
 
   

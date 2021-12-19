@@ -4,6 +4,7 @@ import { Card, Feed, Button } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import {activeNavItem} from '../actions/navItem'
 import history from "../components/history";
+import PropTypes from 'prop-types';
 class Question extends Component {
   toQuestion=(e, qId)=>{
         this.props.dispatch(activeNavItem(''))
@@ -50,3 +51,8 @@ function mapStateToProps( {users, questions},id ){
   }
   
   export default withRouter(connect(mapStateToProps)(Question)) 
+
+  Question.propTypes = {
+    users:PropTypes.object,
+    questions:PropTypes.object
+  };

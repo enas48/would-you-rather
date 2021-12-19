@@ -1,18 +1,19 @@
-import React, { Component} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
-class AnsweredQuestion extends Component {
-    render(){
+import PropTypes from 'prop-types';
+function AnsweredQuestion (props){
+    
   return (
     <div>
-      {this.props.questions
-        .filter((id) => this.props.user.answers[id])
+      {props.questions
+        .filter((id) => props.user.answers[id])
         .map((id) => (
           <Question key={id} id={id} />
         ))}
     </div>
   );
-    }
+    
 } 
 function mapStateToProps( {users,authedUser,questions} ){
     const user=users[authedUser.user]
@@ -21,3 +22,8 @@ function mapStateToProps( {users,authedUser,questions} ){
   }
   
   export default connect(mapStateToProps)(AnsweredQuestion) 
+
+  AnsweredQuestion.propTypes = {
+    questions:PropTypes.array,
+    user:PropTypes.object
+  };
