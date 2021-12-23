@@ -1,27 +1,29 @@
-import React, { Component} from 'react'
+import React, {useState} from 'react'
 import { Card, Feed, Button , Form, Checkbox } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import  {handleSaveAnswer} from '../actions/shared'
-import {   Redirect } from 'react-router-dom'
+import {   Redirect, Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
-class QuestionDetails extends Component {
-  state = { value: "", toPoll: false };
-  handleChange = (e, { value }) => {
-    this.setState({ value });
+function QuestionDetails(props) {
+  const [value, setValue]= useState('')
+  const [toPoll, setToPoll] = useState(false)
+
+ const handleChange = (e,  {value} ) => {
+   setValue(value);
   };
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const user = this.props.user;
-    const questionId = this.props.id;
-    const answer = this.state.value;
-    this.props.dispatch(handleSaveAnswer(user, questionId, answer));
-    this.setState({ value: "", toPoll: true });
+    const user = props.user;
+    const questionId = props.id;
+    const answer = value;
+    props.dispatch(handleSaveAnswer(user, questionId, answer));
+    setValue('')
+    setToPoll(true)
   };
 
-  render() {
-    const questionId = this.props.id;
-    const question = this.props.questions[questionId];
-    if (this.state.toPoll === true) {
+    const questionId = props.id;
+    const question = props.questions[questionId];
+    if (toPoll === true) {
       return <Redirect to={`/questions/${questionId}`} />;
     }
 
@@ -35,7 +37,7 @@ class QuestionDetails extends Component {
             <Feed>
               <Feed.Event>
                 <Feed.Label
-                  image={this.props.users[question.author].avatarURL}
+                  image={props.users[question.author].avatarURL}
                 />
                 <Feed.Content>
                   <Feed.Summary>
@@ -50,9 +52,9 @@ class QuestionDetails extends Component {
                           radio
                           label={question.optionOne.text}
                           name="checkboxRadioGroup"
-                          value={"optionOne"}
-                          checked={this.state.value === "optionOne"}
-                          onChange={this.handleChange}
+                          value="optionOne"
+                          checked={value === "optionOne"}
+                          onChange={handleChange}
                         />
                       </Form.Field>
                       <Form.Field>
@@ -60,9 +62,9 @@ class QuestionDetails extends Component {
                           radio
                           label={question.optionTwo.text}
                           name="checkboxRadioGroup"
-                          value={"optionTwo"}
-                          checked={this.state.value === "optionTwo"}
-                          onChange={this.handleChange}
+                          value="optionTwo"
+                          checked={value === "optionTwo"}
+                          onChange={handleChange}
                         />
                       </Form.Field>
                     </Form>
@@ -70,8 +72,8 @@ class QuestionDetails extends Component {
                       basic
                       color="pink"
                       fluid
-                      onClick={this.handleSubmit}
-                      disabled={this.state.value === ""}
+                      onClick={handleSubmit}
+                      disabled={value === ""}
                     >
                       Submit
                     </Button>
@@ -81,9 +83,10 @@ class QuestionDetails extends Component {
             </Feed>
           </Card.Content>
         </Card>
+            <Button color='pink' as={Link} to="/" labelPosition='left' icon='left chevron' content='Back' />
       </div>
     );
-  }
+  
 }
 function mapStateToProps( {users,authedUser,questions} ,id){
     const user=authedUser.user

@@ -1,9 +1,16 @@
-import React from 'react'
+import React, {  useEffect} from 'react'
 import { Tab } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import AnsweredQuestion from './AnsweredQuestion'
 import UnansweredQuestion from "./UnansweredQuestion";
-function Home(){
- 
+import {activeNavItem} from '../actions/navItem'
+
+function Home(props){
+  const {dispatch}=props
+  useEffect(() => {
+dispatch(activeNavItem('home'))
+}, [dispatch])
+
     const panes = [
       {
         menuItem: 'Unanswered Questions',
@@ -23,5 +30,5 @@ function Home(){
 }
 
 
-export default Home
+export default connect()(Home)
   

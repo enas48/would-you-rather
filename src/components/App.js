@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment ,useEffect} from "react";
 import { Route, Switch } from "react-router-dom";
 import { handleInitialData } from "../actions/shared";
 import { connect } from "react-redux";
 import LoadingBar from "react-redux-loading-bar";
-
+/*component*/
 import Home from "./Home";
 import NewQuestion from "./NewQuestion";
 import QuestionPage from "./QuestionPage";
@@ -12,12 +12,14 @@ import NavBar from "./Nav";
 import Login from "./Login";
 import NotFound from "./NotFound";
 
+
 import ProtectedRoute from "./ProtectedRoute";
-class App extends Component {
-  componentDidMount() {
-    this.props.dispatch(handleInitialData());
-  }
-  render() {
+function  App (props){
+  useEffect(() => {
+  props.dispatch(handleInitialData());
+  }, [props])
+
+
     return (
       <Fragment>
         <LoadingBar style={{ backgroundColor: "#e03997" }} />
@@ -29,14 +31,14 @@ class App extends Component {
             <ProtectedRoute path="/" exact component={Home} />
             <ProtectedRoute path="/add" exact component={NewQuestion} />  
             <ProtectedRoute path="/leaderboard" exact component={LeaderBoard} />
-            <ProtectedRoute  path="/questions/:id"  exact component={QuestionPage}/>       
+            <ProtectedRoute  path="/questions/:id"  exact component={QuestionPage}/>     
             <Route component={NotFound}   />
             
           </Switch>
         </div>
       </Fragment>
     );
-  }
+  
 }
 
 

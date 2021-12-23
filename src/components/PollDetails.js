@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-import { Card, Feed, Label,Progress } from "semantic-ui-react";
+import React from "react";
+import { Card, Feed, Label,Progress ,Button} from "semantic-ui-react";
  import { connect } from "react-redux";
- import {   withRouter } from 'react-router-dom'
-class PollDetails extends Component {
+ import {withRouter, Link} from 'react-router-dom'
+ import PropTypes from 'prop-types';
 
-  render() {
-    const {id,questions,users,user}=this.props
+function PollDetails(props) {
+    const {id,question,users,user}=props
     const questionId = id;
-    const question = questions[questionId];
     const author = users[question.author];
     const authorAnswer = user.answers[questionId];
     const optiononeVotes = question.optionOne.votes.length;
@@ -88,15 +87,24 @@ if(Object.keys(user.answers).includes(questionId)){
             </Feed>
           </Card.Content>
         </Card>
+            <Button color='pink' as={Link} to="/" labelPosition='left' icon='left chevron' content='Back' />
       </div>
     )
                         }else{
                           return<div></div>
                         }
   }
-}
+
 function mapStateToProps({ users, questions ,authedUser},id) {
-  return { questions, users ,user:users[authedUser.user]};
+  return { question :questions[id.id], users ,user:users[authedUser.user]};
 }
 
 export default withRouter(connect(mapStateToProps)(PollDetails));
+
+PollDetails.propTypes = {
+  user:PropTypes.object,
+  question:PropTypes.object,
+  users:PropTypes.object,
+};
+  
+

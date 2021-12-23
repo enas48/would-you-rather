@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Feed,Segment,Label,Header} from 'semantic-ui-react'
-
+import PropTypes from 'prop-types';
 
 function UserBoard(props) {
         const {user}=props
@@ -50,3 +50,9 @@ function UserBoard(props) {
 } 
   
   export default UserBoard
+
+  UserBoard.propTypes = {
+    user:PropTypes.object,
+  }; 
+
+  

@@ -1,47 +1,23 @@
-import React, {Component} from 'react'
+import React, {useState} from 'react';
 import {authenticate} from '../actions/authedUser'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import { Dropdown,Form,Card,Button } from 'semantic-ui-react'
-import {activeNavItem} from '../actions/navItem'
+import { Dropdown, Form, Card, Button } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
-class Login extends Component {
-  state = {
-    authedUser: "",
-  };
 
-  handleChange = (event, data) => {
-    this.setState({ authedUser: data.value });
-  };
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { state } = this.props.location;
-    const redirectUrl = state ? state.from.pathname : "/";
-    let activeItem ;
-    if(state){
-      let pathname= state.from.pathname
-      if(pathname==='/'){
-        activeItem = 'home'
-      }
-      if(pathname==='/add'){
-        activeItem = 'New Question'
-      }
-      if(pathname==='/leaderboard'){
-        activeItem = 'Leader Board'
-      }
-      
-    }else{
-      activeItem ='home'
-    }
+function Login (props){
+  const [authedUser , setAuthedUser] = useState('')
  
-    this.props.dispatch(authenticate(this.state.authedUser, redirectUrl));
-    this.props.dispatch(activeNavItem(activeItem));
+  const handleChange = (event, data) => {
+    setAuthedUser(data.value)
   };
-  componentDidMount(){
-    console.log(this.props.location.state)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { state } = props.location;
+    const redirectUrl = state ? state.from.pathname : "/";
+    props.dispatch(authenticate(authedUser, redirectUrl));
+  };
 
-  }
-  render() {
 
     return (
       <Card className="m-auto">
@@ -56,15 +32,15 @@ class Login extends Component {
                 placeholder="Select User"
                 fluid
                 selection
-                options={this.props.users}
-                onChange={this.handleChange}
+                options={props.users}
+                onChange={handleChange}
               />
               <Button
                 basic
                 color="pink"
                 fluid
-                onClick={this.handleSubmit}
-                disabled={!this.state.authedUser}
+                onClick={handleSubmit}
+                disabled={!authedUser}
               >
                 Sign In
               </Button>
@@ -73,7 +49,7 @@ class Login extends Component {
         </Card.Content>
       </Card>
     );
-  }
+  
 } 
 
 function mapStateToProps( {users} ){

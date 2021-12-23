@@ -1,8 +1,14 @@
-import React from 'react'
+import React, {  useEffect} from 'react'
 import { connect } from 'react-redux'
 import UserBoard from './UserBoard'
 import PropTypes from 'prop-types';
+import {activeNavItem} from '../actions/navItem'
+
 function LeaderBoard (props) {
+   const {dispatch}=props
+    useEffect(() => {
+  dispatch(activeNavItem('Leader Board'))
+  }, [dispatch])
 
       const users = props.users;
       return (
@@ -11,8 +17,7 @@ function LeaderBoard (props) {
             <UserBoard key={user.id} user={user} />
           ))}
         </div>
-      );
-    
+      );   
 } 
 
 function mapStateToProps( {users, questions} ){
@@ -26,7 +31,7 @@ function mapStateToProps( {users, questions} ){
         (Object.keys(a.answers).length + a.questions.length)
     );
 
-  return { users: allusers, questions };
+  return { users: allusers };
 }
   export default connect(mapStateToProps)(LeaderBoard)
 

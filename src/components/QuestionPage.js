@@ -27,7 +27,7 @@ function mapStateToProps( {users,authedUser,questions} ){
   export default connect(mapStateToProps)(QuestionPage)
 
   QuestionPage.propTypes = {
-    user:PropTypes.string,
+    user:PropTypes.object,
     users:PropTypes.object,
     questions:PropTypes.object
   }; 

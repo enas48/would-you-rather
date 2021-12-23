@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import Question from './Question'
 import PropTypes from 'prop-types';
 function AnsweredQuestion (props){
-    
   return (
     <div>
       {props.questions

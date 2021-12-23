@@ -1,28 +1,40 @@
-import React,{Component} from 'react'
+import React,{useState, useEffect} from 'react'
 import { Card, Form, Button,Divider} from 'semantic-ui-react'
 import  {handleAddQuestion} from '../actions/questions'
-import {   Redirect } from 'react-router-dom'
-import { connect } from "react-redux";
+import {Redirect } from 'react-router-dom'
+import {connect } from "react-redux";
 import {activeNavItem} from '../actions/navItem'
-class NewQuestion extends Component {
-  state = {
-    optionOne: "",
-    optionTwo: "",
-    toHome: false,
+import PropTypes from 'prop-types';
+
+function NewQuestion(props) {
+  const [optionOne, setOptionOne]=useState("")
+  const [optionTwo, setOptionTwo]=useState("")
+  const [toHome, setToHome]=useState(false)
+  const {dispatch}=props
+  useEffect(() => {
+    dispatch(activeNavItem('New Question'))
+  }, [dispatch])
+ 
+ const handleChange = (e) => {
+   const {name, value} =e.target
+   if(name==='optionOne'){
+    setOptionOne(value );
+   }
+   if(name==='optionTwo'){
+    setOptionTwo(value );
+   }
   };
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { optionOne, optionTwo } = this.state;
-    const{user, dispatch}=this.props
+    const{user, dispatch}=props
     dispatch(handleAddQuestion(optionOne, optionTwo, user));
     dispatch(activeNavItem("home"));
-    this.setState({ optionOne: "", optionTwo: "", toHome: true });
+    setOptionOne('')
+    setOptionTwo('')
+    setToHome(true)
   };
-  render() {
-    if (this.state.toHome === true) {
+
+    if (toHome === true) {
       return <Redirect to="/" />;
     }
     return (
@@ -45,8 +57,8 @@ class NewQuestion extends Component {
                   <input
                     placeholder="Enter Option One Text Here"
                     name="optionOne"
-                    value={this.state.optionOne}
-                    onChange={this.handleChange}
+                    value={optionOne}
+                    onChange={handleChange}
                   />
                 </Form.Field>
 
@@ -55,8 +67,8 @@ class NewQuestion extends Component {
                   <input
                     placeholder="Enter Option Two Text Here"
                     name="optionTwo"
-                    value={this.state.optionTwo}
-                    onChange={this.handleChange}
+                    value={optionTwo}
+                    onChange={handleChange}
                   />
                 </Form.Field>
                 <Button
@@ -64,9 +76,9 @@ class NewQuestion extends Component {
                   color="pink"
                   type="submit"
                   fluid
-                  onClick={this.handleSubmit}
+                  onClick={handleSubmit}
                   disabled={
-                    this.state.optionOne === "" || this.state.optionTwo === ""
+                    optionOne === "" || optionTwo === ""
                   }
                 >
                   Submit
@@ -77,12 +89,17 @@ class NewQuestion extends Component {
         </Card>
       </div>
     );
-  }
+  
 } 
 function mapStateToProps({ authedUser}) {
   return {user:authedUser.user};
 }
 
 export default connect(mapStateToProps)(NewQuestion);
+
+NewQuestion.propTypes = {
+  user:PropTypes.string
+};
+  
 
   
