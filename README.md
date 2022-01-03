@@ -1,5 +1,8 @@
 # Would You Rather Project
 
+# Demo: 
+https://would-you-rather-eight.vercel.app/login
+
 npm install and npm start to install and launch.
 
 This is the starter code for the final assessment project for Udacity's React & Redux course.
